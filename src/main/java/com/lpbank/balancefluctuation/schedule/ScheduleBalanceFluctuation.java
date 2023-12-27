@@ -19,13 +19,13 @@ public class ScheduleBalanceFluctuation {
         this.balanceFluctuationService = balanceFluctuationService;
     }
 
-   // @Scheduled(fixedDelay = 300000)
+    //@Scheduled(fixedDelay = 300000)
    // @Scheduled(cron = "0 0/5 * * * ?") // Chạy mỗi 5 phút
     //@Scheduled(cron = "0 * * * * ?") // Chạy mỗi 5 phút
    @PostConstruct
     public void scheduleDelayTask() {
         System.out.println("5 phút 1 lần!" + new Date());
-        balanceFluctuationService.test();
+        balanceFluctuationService.reportDebit();
         System.out.println("done");
     }
 }
