@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "send_data_transaction_viettel_store", catalog = "LVBHOST")
+@Table(name = "send_data_transaction_viettel_store", catalog = "USER_ESB")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

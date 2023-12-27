@@ -9,17 +9,20 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
+import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
+import java.util.HashMap;
 
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories(
-        basePackages = "com.example.repository1",
+        basePackages = "com.lpbank.balancefluctuation.model.entityDatasource1",
         entityManagerFactoryRef = "entityManagerFactory1",
         transactionManagerRef = "transactionManager1"
 )
@@ -34,12 +37,19 @@ public class DataSource1Config {
 
     @Primary
     @Bean(name = "entityManagerFactory1")
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory(EntityManagerFactoryBuilder builder, @Qualifier("dataSource1") DataSource dataSource) {
-        return builder
-                .dataSource(dataSource)
-                .packages("com.lpbank.balancefluctuation.model.entityDatasource1")
-                .persistenceUnit("db1")
-                .build();
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory(@Qualifier("dataSource1") DataSource dataSource) {
+        LocalContainerEntityManagerFactoryBean bean = new LocalContainerEntityManagerFactoryBean();
+        bean.setDataSource(dataSource);
+        JpaVendorAdapter adapter = new HibernateJpaVendorAdapter();
+        bean.setJpaVendorAdapter(adapter);
+        HashMap<String,Object> properties = new HashMap<>();
+        properties.put("hibernate.show_sql", "true");
+//        properties.put("hibernate.hbm2ddl.auto", "update");
+        properties.put("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
+        bean.setJpaPropertyMap(properties);
+        bean.setPackagesToScan("com.lpbank.balancefluctuation.model.entityDatasource1");
+        bean.setPersistenceUnitName("db1");
+        return bean;
     }
 
     @Primary

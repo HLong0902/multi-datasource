@@ -22,10 +22,10 @@ public class ScheduleBalanceFluctuation {
    // @Scheduled(fixedDelay = 300000)
    // @Scheduled(cron = "0 0/5 * * * ?") // Chạy mỗi 5 phút
     //@Scheduled(cron = "0 * * * * ?") // Chạy mỗi 5 phút
-   @PostConstruct
-    public void scheduleDelayTask() {
-        System.out.println("5 phút 1 lần!" + new Date());
-        balanceFluctuationService.test();
-        System.out.println("done");
-    }
+//   @PostConstruct
+//    public void scheduleDelayTask() {
+//        System.out.println("5 phút 1 lần!" + new Date());
+//        balanceFluctuationService.test();
+//        System.out.println("done");
+//    }
 }
