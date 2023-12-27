@@ -1,4 +1,4 @@
-package com.lpbank.balancefluctuation.entity;
+package com.lpbank.balancefluctuation.model.entityDatasource1;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
