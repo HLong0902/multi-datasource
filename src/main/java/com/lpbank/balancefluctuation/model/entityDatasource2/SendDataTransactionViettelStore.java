@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "send_data_transaction_viettel_store", catalog = "USER_ESB")
@@ -12,11 +13,10 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SendDataTransactionViettelStore {
-    @Id
-    @Column(name = "ID")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    @Column(name = "ISSUE_DATE")
+    private LocalDateTime issueDate;
 
+    @Id
     @Column(name = "AC_ENTRY_SR_NO")
     private Long acEntrySrNo;
 

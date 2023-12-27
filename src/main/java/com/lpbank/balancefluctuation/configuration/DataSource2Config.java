@@ -1,5 +1,6 @@
 package com.lpbank.balancefluctuation.configuration;
 
+import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.jdbc.DataSourceBuilder;
@@ -22,7 +23,7 @@ import java.util.HashMap;
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories(
-        basePackages = "com.lpbank.balancefluctuation.model.entityDatasource2",
+        basePackages = "com.lpbank.balancefluctuation.repository.datasource2",
         entityManagerFactoryRef = "entityManagerFactory2",
         transactionManagerRef = "transactionManager2"
 )
@@ -44,8 +45,10 @@ public class DataSource2Config {
         properties.put("hibernate.show_sql", "true");
 //        properties.put("hibernate.hbm2ddl.auto", "update");
         properties.put("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
+        properties.put("hibernate.enable_lazy_load_no_trans", true);
         bean.setJpaPropertyMap(properties);
         bean.setPackagesToScan("com.lpbank.balancefluctuation.model.entityDatasource2");
+        bean.setPersistenceProviderClass(HibernatePersistenceProvider.class);
         bean.setPersistenceUnitName("db2");
         return bean;
     }
