@@ -8,13 +8,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 
-@FeignClient(value = "balanceFluctuation", url = "http://10.36.126.90:30101")
+import java.util.Map;
+import java.util.Objects;
+
+@FeignClient(name = "settleClient", url = "http://api-gw-dev.lpbank.com.vn/")
 public interface CallAPIBalanceFluctuationVST {
-    @PostMapping(value = "/esb-gateway-service/settle-service/api/v1/settle/settle-bill")
-    ResponseEntity<String> transactionSync(
-            @RequestHeader("msgid") String msgid,
-            @RequestHeader("service") String service,
-            @RequestHeader("operation") String operation,
-            @RequestHeader("userid") String userid,
-            @RequestBody ReqTransactionSync reqTransactionSync);
+    @PostMapping("/gw/internal/settle-service/api/v1/settle/settle-bill")
+    ResponseEntity<Map<String, Object>> transactionSync(
+            @RequestHeader("Authorization") String authorization,
+            @RequestBody ReqTransactionSync reqTransactionSync
+    );
 }

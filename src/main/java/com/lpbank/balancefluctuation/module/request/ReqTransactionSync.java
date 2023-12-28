@@ -10,11 +10,6 @@ import java.util.List;
 @Getter
 @Setter
 public class ReqTransactionSync {
-    private String confirmTrn;
-    private String customerNo;
-    private String trnBrn;
-    private String trnDesc;
-    private Service service;
-    private Partner partner;
-    private List<BillInfo> listBillInfo;
+    private Header header;
+    private Body body;
 }

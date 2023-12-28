@@ -7,7 +7,7 @@ import lombok.*;
 @NoArgsConstructor
 @Getter
 @Setter
-public class Service {
+public class ServiceB {
     private String serviceId;
     private String productCode;
     private String requestAccount;
