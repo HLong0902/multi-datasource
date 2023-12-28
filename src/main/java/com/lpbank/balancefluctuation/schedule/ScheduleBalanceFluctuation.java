@@ -1,9 +1,8 @@
 package com.lpbank.balancefluctuation.schedule;
 
 
-import com.lpbank.balancefluctuation.service.BalanceFluctuationServiceImpl;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.scheduling.annotation.EnableScheduling;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.lpbank.balancefluctuation.service.impl.BalanceFluctuationServiceImpl;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
@@ -19,13 +18,12 @@ public class ScheduleBalanceFluctuation {
         this.balanceFluctuationService = balanceFluctuationService;
     }
 
-   // @Scheduled(fixedDelay = 300000)
-   // @Scheduled(cron = "0 0/5 * * * ?") // Chạy mỗi 5 phút
-    //@Scheduled(cron = "0 * * * * ?") // Chạy mỗi 5 phút
-//   @PostConstruct
-//    public void scheduleDelayTask() {
-//        System.out.println("5 phút 1 lần!" + new Date());
-//        balanceFluctuationService.test();
-//        System.out.println("done");
-//    }
+    @Scheduled(fixedDelay = 60)
+//    @Scheduled(cron = "0 0/5 * * * ?") // Chạy mỗi 5 phút
+//    @Scheduled(cron = "0 * * * * ?") // Chạy mỗi 5 phút
+   //@PostConstruct
+    public void scheduleDelayTask() throws JsonProcessingException {
+        balanceFluctuationService.reportDebit();
+        System.out.println("done");
+    }
 }
