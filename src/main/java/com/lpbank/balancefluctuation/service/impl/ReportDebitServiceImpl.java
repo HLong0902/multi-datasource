@@ -17,9 +17,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -36,6 +34,9 @@ public class ReportDebitServiceImpl implements ReportDebitService {
     @Value("${retry-num}")
     private Integer retryNum;
 
+    @Value("${spring.profiles.active}")
+    private String configSpring;
+
     @Override
     public void sendDataTransVTS(){
         List<SendDataTransactionViettelStore> sendDataTransVTSs = sendDataTransRepo.findAllToSend(batchSize, retryNum);
@@ -43,9 +44,15 @@ public class ReportDebitServiceImpl implements ReportDebitService {
             sendDataTransVTS.setStatus(SendStatus.SENDING.value());
             sendDataTransRepo.save(sendDataTransVTS);
         });
+        Map<Long, List<SendDataTransactionViettelStore>> dataSend = new HashMap<>();
 
 
         sendDataTransVTSs.forEach(sendDataTransVTS -> {
+            if (dataSend.containsKey(sendDataTransVTS.getAcEntrySrNo())) {
+                dataSend.get(sendDataTransVTS.getAcEntrySrNo()).add(sendDataTransVTS);
+            } else dataSend.put(sendDataTransVTS.getAcEntrySrNo(), List.of(sendDataTransVTS));
+
+
             Optional<ActbDailyLog> actbDailyLogOpt = actbDailyLogRepo.findById(sendDataTransVTS.getAcEntrySrNo());
             Integer retryNum = sendDataTransVTS.getRetryNum() + 1;
             if (actbDailyLogOpt.isEmpty()) {
@@ -74,6 +81,11 @@ public class ReportDebitServiceImpl implements ReportDebitService {
                 }
             }
         });
+
+        dataSend.forEach((acEntrySrNo, sendDataTransVTSList) -> {
+            ActbDailyLog actbDailyLog = actbDailyLogRepo.getById(acEntrySrNo);
+
+        });
     }
 
 
@@ -91,7 +103,11 @@ public class ReportDebitServiceImpl implements ReportDebitService {
     public void getTransFromCore() {
         List<SendDataTransactionViettelStore> sendDataTransVTSs = new ArrayList<>();
         List<String> vtsAccounts= vtsAccountRepo.findAllByRecordStat("O").stream().map(VTSAccount::getAccountNo).toList();
-        List<Object[]> datas = actbDailyLogRepo.getTransFromCore(batchSize);
+
+        List<Object[]> datas = new ArrayList<>();
+        if (configSpring.equals("dev")) {
+            datas = actbDailyLogRepo.getTransFromCore(batchSize);
+        } else datas = actbDailyLogRepo.getTransFromDWH(batchSize);
         datas.forEach(data -> {
             String acNo =  String.valueOf(data[1]);
             if (vtsAccounts.contains(acNo) && !sendDataTransRepo.existsById(Long.parseLong(data[0].toString()))) {

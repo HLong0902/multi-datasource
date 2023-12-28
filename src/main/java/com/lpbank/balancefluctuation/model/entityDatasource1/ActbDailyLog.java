@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 @Entity
-@Table(name = "ACTB_DAILY_LOG", catalog = "LVBHOST")
+@Table(name = "ACTB_DAILY_LOG")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

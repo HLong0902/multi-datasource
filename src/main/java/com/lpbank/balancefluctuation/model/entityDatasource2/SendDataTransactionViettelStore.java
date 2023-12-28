@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 
 @Builder
 @Entity
-@Table(name = "send_data_transaction_viettel_store", catalog = "USER_ESB")
+@Table(name = "send_data_transaction_viettel_store")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

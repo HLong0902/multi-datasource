@@ -12,7 +12,7 @@ import javax.persistence.Table;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "ESB_VTS_ACCOUNT_JOB", catalog = "USER_ESB")
+@Table(name = "ESB_VTS_ACCOUNT_JOB")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
