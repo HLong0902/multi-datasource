@@ -46,7 +46,7 @@ public class BalanceFluctuationServiceImpl {
         String tes = "";
         if (Objects.isNull(tokenService.getToken()) || tokenService.getToken().isEmpty()) {
             tes = tokenService.getAuthToken();
-            tokenService.saveToken(tes, 120);
+            tokenService.saveToken(tes, 72000);
             System.out.println("Token moi : " + tes + "\n Time: " + new Date());
         } else {
             tes = tokenService.getToken();

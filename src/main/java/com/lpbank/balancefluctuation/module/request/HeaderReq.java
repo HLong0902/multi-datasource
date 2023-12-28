@@ -7,7 +7,7 @@ import lombok.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Header {
+public class HeaderReq {
     private String msgid;
     private String service;
     private String operation;

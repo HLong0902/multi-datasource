@@ -2,14 +2,12 @@ package com.lpbank.balancefluctuation.module.respone;
 
 import lombok.*;
 
-import java.util.Map;
-
 @Data
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ResAuthen {
+public class AuthenRes {
     private String errorCode;
     private boolean success;
     private Object content;
