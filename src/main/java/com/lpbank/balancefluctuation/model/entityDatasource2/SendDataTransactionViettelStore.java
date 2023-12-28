@@ -1,12 +1,15 @@
 package com.lpbank.balancefluctuation.model.entityDatasource2;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+@Builder
 @Entity
 @Table(name = "send_data_transaction_viettel_store", catalog = "USER_ESB")
 @Data
@@ -28,4 +31,9 @@ public class SendDataTransactionViettelStore {
 
     @Column(name = "MESSAGE_LOG")
     private String messageLog;
+
+    public void setMessageLog(String messageLog) {
+        if (this.messageLog == null) this.messageLog = messageLog;
+        else this.messageLog += messageLog + "\n";
+    }
 }
