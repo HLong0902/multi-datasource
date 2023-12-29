@@ -7,7 +7,7 @@ import lombok.*;
 @NoArgsConstructor
 @Setter
 @Getter
-public class ResTransactionSync {
-    private CodeRes resCode;
-    private DataRes data;
+public class DataRes {
+    private HeaderRes header;
+    private BodyRes body;
 }

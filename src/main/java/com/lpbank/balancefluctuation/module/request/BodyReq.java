@@ -1,7 +1,6 @@
 package com.lpbank.balancefluctuation.module.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.*;
 
 @Data
@@ -9,7 +8,7 @@ import lombok.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Body {
+public class BodyReq {
    @JsonProperty("SettleBill")
     private SettleBill SettleBill;
 }

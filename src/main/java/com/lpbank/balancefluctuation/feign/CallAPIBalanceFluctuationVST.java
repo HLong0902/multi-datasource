@@ -14,7 +14,7 @@ import java.util.Objects;
 @FeignClient(name = "settleClient", url = "http://api-gw-dev.lpbank.com.vn/")
 public interface CallAPIBalanceFluctuationVST {
     @PostMapping("/gw/internal/settle-service/api/v1/settle/settle-bill")
-    ResponseEntity<Map<String, Object>> transactionSync(
+    ResTransactionSync transactionSync(
             @RequestHeader("Authorization") String authorization,
             @RequestBody ReqTransactionSync reqTransactionSync
     );
