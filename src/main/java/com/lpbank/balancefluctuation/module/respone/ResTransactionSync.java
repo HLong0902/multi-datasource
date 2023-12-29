@@ -8,6 +8,6 @@ import lombok.*;
 @Setter
 @Getter
 public class ResTransactionSync {
-    private CodeRes resCode;
+    private ResCode resCode;
     private DataRes data;
 }

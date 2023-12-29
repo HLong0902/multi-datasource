@@ -7,7 +7,7 @@ import lombok.*;
 @NoArgsConstructor
 @Setter
 @Getter
-public class CodeRes {
+public class ResCode {
     private String errorCode;
     private String errorDesc;
     private String refCode;
