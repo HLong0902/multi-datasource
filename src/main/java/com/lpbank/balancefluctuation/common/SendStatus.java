@@ -4,10 +4,10 @@ package com.lpbank.balancefluctuation.common;
 import javax.persistence.criteria.CriteriaBuilder;
 
 public enum SendStatus {
-    ACTIVE(1),
-    SENDING(2),
-    FAIL(3),
-    SENT(4);
+    ACTIVE(0),
+    SENDING(1),
+    FAIL(2),
+    SENT(3);
 
 
     SendStatus(Integer i) {

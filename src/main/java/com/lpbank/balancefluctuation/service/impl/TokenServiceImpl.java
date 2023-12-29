@@ -18,7 +18,7 @@ import java.util.concurrent.TimeUnit;
 public class TokenServiceImpl {
     private final JdbcTemplate jdbcTemplate;
     private final CallAPITokenVST callAPITokenVST;
-    private static final String TOKEN_KEY_PREFIX = "3";
+    public static final String TOKEN_KEY_PREFIX = "3";
     private final RedisTemplate<String, String> redisTemplate;
 
     public TokenServiceImpl(JdbcTemplate jdbcTemplate, CallAPITokenVST callAPITokenVST, RedisTemplate<String, String> redisTemplate) {

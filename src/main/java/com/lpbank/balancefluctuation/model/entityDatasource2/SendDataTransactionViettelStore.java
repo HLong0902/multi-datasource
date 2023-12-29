@@ -32,6 +32,15 @@ public class SendDataTransactionViettelStore {
     @Column(name = "MESSAGE_LOG")
     private String messageLog;
 
+    @Column(name = "CUST_NO")
+    private String custNo;
+
+    @Column(name = "TRN_DESC")
+    private String trnDesc;
+
+    @Column(name = "SOURCE_ACC")
+    private String sourceAcc;
+
     public void setMessageLog(String messageLog) {
         if (this.messageLog == null) this.messageLog = messageLog;
         else this.messageLog += messageLog + "\n";
